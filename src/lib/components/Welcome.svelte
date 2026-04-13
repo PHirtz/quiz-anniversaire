@@ -21,7 +21,7 @@
 <div class="welcome">
   <div class="deco">
     <span class="icon">🎂</span>
-    <div class="title">Jeu d'Anniversaire</div>
+    <div class="title">Jeu d'Anniversaire Biche</div>
     <div class="subtitle">Le grand quizz des invités</div>
   </div>
 
@@ -32,7 +32,7 @@
     id="team-input"
     type="text"
     bind:value={inputValue}
-    placeholder="Nom du joueur..."
+    placeholder="Ton name game..."
     class:error
     on:keydown={onKeydown}
     on:input={() => error = false}

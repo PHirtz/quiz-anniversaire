@@ -2,10 +2,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&display=swap');
 
 /* ===== THÈME ANNIVERSAIRE — or & fête ===== */
-/* 🎨 Pour changer le thème : modifie uniquement ce bloc :root */
 :root {
   /* Couleurs principales */
-  --accent:       #e07b39;       /* orange fête */
+  --accent:       #e07b39;
   --accent-light: #f0a060;
   --accent-rgb:   224, 123, 57;  /* même valeur en RGB pour les rgba() */
 

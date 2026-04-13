@@ -1,103 +1,132 @@
 <svelte:options runes={false} />
 <script>
-  import { get } from 'svelte/store';
-  import { score, teamName, userAnswers, resetGame } from '$lib/stores/game.js';
-  import { isCorrect } from '$lib/utils/normalize.js';
-  import { steps, QUIZ_TOTAL } from '$lib/data/steps.js';
+  import { onMount } from 'svelte';
+  import { score, teamName, resetGame } from '$lib/stores/game.js';
+  import { QUIZ_TOTAL } from '$lib/data/steps.js';
 
-  $: pct     = Math.round(($score / QUIZ_TOTAL) * 100);
-  $: mention = pct === 100 ? '🏆 Score parfait !' : pct >= 70 ? '🥈 Bien joué !' : '🥉 Pas mal !';
+  onMount(() => launchConfetti());
 
-  $: quizSteps = steps
-    .map((step, i) => ({ step, i }))
-    .filter(({ step }) => step.type === 'quiz');
+  function launchConfetti() {
+    const symbols = ["🎂","🎈","🎁","🎉","🥳","🍰","🎊","✨","🌟","🎶","🫶","💫","🐨"];
+    for (let i = 0; i < 50; i++) {
+      const p = document.createElement("span");
+      p.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+      p.classList.add('confetti-petal');
+      p.style.cssText = `
+        position:fixed;
+        top:-2rem;
+        left:${Math.random() * 100}vw;
+        font-size:${1 + Math.random() * 1.5}rem;
+        z-index:999;
+        pointer-events:none;
+        animation: confettiFall ${3 + Math.random() * 5}s ${Math.random() * 3}s linear forwards;
+      `;
+      document.body.appendChild(p);
+      setTimeout(() => p.remove(), 8000);
+    }
+  }
 </script>
 
-<div class="gameover">
-  <div class="header">
-    <div class="icon">🎉</div>
-    <h2>Bravo, {$teamName} !</h2>
-    <div class="mention">{mention}</div>
-    <div class="final-score">{$score} / {QUIZ_TOTAL}</div>
-    <p class="pct">{pct}% de réussite</p>
-  </div>
+<div class="victory">
+  <span class="cake">🎂</span>
+  <h2>Bravo {$teamName} !</h2>
+  <p class="subtitle">Vous avez relevé tous les défis !</p>
+  <p class="score-final">Score : <strong>{$score} / {QUIZ_TOTAL}</strong></p>
 
-  <div class="recap">
-    {#each quizSteps as { step, i }}
-      {@const answer = $userAnswers[i] ?? ''}
-      {@const correct = isCorrect(answer, step.answer)}
-      <div class="item" class:correct class:wrong={!correct}>
-        <div class="item-title">{step.title}</div>
-        <div class="item-question">{step.description}</div>
-        <div class="item-answer">
-          <strong>Votre réponse :</strong>
-          <span class:ok={correct} class:ko={!correct}>
-            {answer || '(aucune réponse)'}
-          </span>
-        </div>
-        <div class="item-good">
-          <strong>Bonne réponse :</strong>
-          {Array.isArray(step.answer) ? step.answer.join(' / ') : step.answer}
-        </div>
-      </div>
-    {/each}
-  </div>
+  {#if $score === QUIZ_TOTAL}
+    <p class="mention">🏆 Score parfait, chapeau !</p>
+  {:else if $score >= QUIZ_TOTAL * 0.75}
+    <p class="mention">🌟 Très beau score !</p>
+  {:else if $score >= QUIZ_TOTAL * 0.5}
+    <p class="mention">👍 Pas mal du tout !</p>
+  {:else}
+    <p class="mention">🐨 L'important c'est d'avoir joué !</p>
+  {/if}
 
-  <button class="btn-reset" on:click={resetGame}>🔄 Recommencer</button>
+  <p class="emojis">🎂 🎈 🎉 🐨</p>
+  <button on:click={resetGame}>↩ Rejouer</button>
 </div>
 
 <style>
-  .gameover { padding: 8px 0; }
+  .victory {
+    text-align: center;
+    padding: 12px 0;
+  }
 
-  .header { text-align: center; padding-bottom: 24px; }
-  .icon   { font-size: 60px; margin-bottom: 8px; }
+  .cake {
+    display: block;
+    font-size: 3.5rem;
+    margin-bottom: 12px;
+    animation: bounce 1s ease infinite alternate;
+  }
+
+  @keyframes bounce {
+    from { transform: translateY(0) rotate(-5deg); }
+    to   { transform: translateY(-10px) rotate(5deg); }
+  }
 
   h2 {
     font-family: var(--font-title);
+    font-size: 1.5rem;
     color: var(--accent);
-    font-size: 1.3rem;
-    font-weight: 400;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.1em;
     margin-bottom: 8px;
   }
 
-  .mention     { font-size: 1.6rem; margin: 10px 0; }
-  .final-score { font-size: 2rem; font-weight: 600; color: var(--accent); }
-  .pct         { color: var(--muted); font-size: 0.9rem; margin-top: 4px; font-style: italic; }
-
-  .recap { display: flex; flex-direction: column; gap: 12px; }
-
-  .item {
-    padding: 12px 14px;
-    border-radius: 12px;
-    font-size: 0.95rem;
-    border: 1px solid;
+  .subtitle {
+    color: var(--ink-dim);
+    font-style: italic;
+    margin-bottom: 6px;
   }
-  .item.correct { background: #f0f9f4; border-color: #bde5c8; }
-  .item.wrong   { background: #fff3f5; border-color: #f5c2c7; }
 
-  .item-title    { font-weight: 600; font-size: 0.9rem; margin-bottom: 4px; }
-  .item-question { color: var(--ink-dim); margin-bottom: 8px; font-style: italic; font-size: 0.9rem; }
-  .item-answer   { font-size: 0.88rem; margin-bottom: 3px; }
-  .item-good     { font-size: 0.85rem; color: #555; }
+  .score-final {
+    font-size: 1.15rem;
+    color: var(--accent);
+    margin: 14px 0 6px;
+  }
 
-  .ok { color: #3daa6a; }
-  .ko { color: #d64550; }
+  .mention {
+    font-size: 0.95rem;
+    font-style: italic;
+    color: var(--ink-dim);
+    margin: 4px 0 10px;
+  }
 
-  .btn-reset {
-    width: 100%;
-    margin-top: 20px;
-    padding: 12px;
-    border: 1px dashed var(--border);
+  .emojis {
+    font-size: 1.8rem;
+    letter-spacing: 0.3em;
+    margin: 16px 0;
+  }
+
+  button {
+    margin-top: 16px;
+    padding: 12px 28px;
+    border: 1px solid rgba(var(--accent-rgb), 0.38);
     border-radius: 12px;
     background: transparent;
-    color: var(--muted);
-    font-family: var(--font-body);
-    font-style: italic;
-    font-size: 0.9rem;
+    color: var(--accent);
+    font-family: var(--font-title);
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
     cursor: pointer;
-    transition: all 0.2s;
     opacity: 0.7;
+    transition: opacity 0.2s;
   }
-  .btn-reset:hover { opacity: 1; }
+
+  button:hover { opacity: 1; }
+
+:global(.confetti-petal) {
+    animation: confettiFall linear forwards;
+  }
 </style>
+
+<svelte:head>
+  <style>
+    @keyframes confettiFall {
+      0%   { opacity: 0; transform: translateY(-30px) rotate(0deg); }
+      10%  { opacity: 0.9; }
+      90%  { opacity: 0.3; }
+      100% { opacity: 0; transform: translateY(110vh) rotate(540deg) translateX(40px); }
+    }
+  </style>
+</svelte:head>

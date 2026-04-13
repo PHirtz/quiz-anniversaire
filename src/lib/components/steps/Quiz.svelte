@@ -1,21 +1,21 @@
 <svelte:options runes={false} />
 <script>
-  import { onMount } from 'svelte';
   import { submitQuiz } from '$lib/stores/game.js';
-
   export let step;
 
-  let value = '';
-  let inputEl;
+  let selected = [];
 
-  onMount(() => setTimeout(() => inputEl?.focus(), 50));
-
-  function submit() {
-    submitQuiz(value, step);
+  function toggle(option) {
+    if (selected.includes(option)) {
+      selected = selected.filter(o => o !== option);
+    } else {
+      selected = [...selected, option];
+    }
   }
 
-  function onKeydown(e) {
-    if (e.key === 'Enter') submit();
+  function submit() {
+    if (selected.length === 0) return;
+    submitQuiz(selected, step);
   }
 </script>
 
@@ -23,15 +23,21 @@
   <p class="aide">💡 {step.aide}</p>
 {/if}
 
-<input
-  bind:this={inputEl}
-  bind:value
-  type="text"
-  placeholder="Votre réponse..."
-  on:keydown={onKeydown}
-/>
+<div class="options">
+  {#each step.options as option}
+    <button
+      class="option"
+      class:selected={selected.includes(option)}
+      on:click={() => toggle(option)}
+    >
+      {option}
+    </button>
+  {/each}
+</div>
 
-<button on:click={submit}>Valider</button>
+<button class="valider" on:click={submit} disabled={selected.length === 0}>
+  Valider
+</button>
 
 <style>
   .aide {
@@ -46,33 +52,42 @@
     margin: 12px 0;
   }
 
-  input {
-    width: 100%;
-    padding: 14px 16px;
+  .options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 16px;
+    justify-content: center;
+  }
+
+  .option {
+    padding: 12px 20px;
     border-radius: 12px;
     border: 1px solid var(--border);
     background: rgba(247, 252, 247, 0.85);
     color: var(--ink);
     font-family: inherit;
-    font-size: 1.1rem;
-    outline: none;
-    margin-top: 16px;
-    margin-bottom: 4px;
-    transition: border-color 0.2s, box-shadow 0.2s;
-  }
-  input:focus {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.18);
-  }
-  input::placeholder {
-    color: var(--muted);
-    font-style: italic;
-    opacity: 0.7;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
   }
 
-  button {
+  .option:hover {
+    border-color: var(--accent);
+    box-shadow: 0 4px 14px rgba(var(--accent-rgb), 0.18);
+    transform: translateY(-1px);
+  }
+
+  .option.selected {
+    background: rgba(var(--accent-rgb), 0.15);
+    border-color: var(--accent);
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .valider {
     width: 100%;
-    margin-top: 12px;
+    margin-top: 16px;
     padding: 14px;
     border: 1px solid rgba(var(--accent-rgb), 0.38);
     border-radius: 12px;
@@ -84,10 +99,15 @@
     cursor: pointer;
     transition: all 0.3s;
   }
-  button:hover {
+
+  .valider:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  .valider:not(:disabled):hover {
     border-color: var(--accent);
     box-shadow: 0 4px 20px rgba(var(--accent-rgb), 0.22);
     transform: translateY(-1px);
   }
-  button:active { transform: scale(0.98); }
 </style>

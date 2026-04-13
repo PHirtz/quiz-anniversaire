@@ -18,7 +18,16 @@ function matchOne(input, ref) {
 
 /** Vérifie si la réponse est correcte (accepte un tableau de réponses) */
 export function isCorrect(input, answer) {
-  const inp = normalize(input);
   const answers = Array.isArray(answer) ? answer : [answer];
+
+  // Si input est un tableau (QCM), on compare les tableaux
+  if (Array.isArray(input)) {
+    const normalizedInput = input.map(normalize).sort();
+    const normalizedAnswer = answers.map(normalize).sort();
+    return JSON.stringify(normalizedInput) === JSON.stringify(normalizedAnswer);
+  }
+
+  // Si input est une string (saisie libre)
+  const inp = normalize(input);
   return answers.some(a => matchOne(inp, a));
 }

@@ -45,30 +45,37 @@
       setTimeout(nextStep, 2500);
     }
   }
+
+function pieceStyle(originalIdx, pSize, cSize) {
+  const col = originalIdx % SIZE;
+  const row = Math.floor(originalIdx / SIZE);
+  return [
+    `width:${pSize}px`,
+    `height:${pSize}px`,
+    `background-image:url('${step.image}')`,
+    `background-size:${cSize}px ${cSize}px`,
+    `background-position:-${col * pSize}px -${row * pSize}px`,
+    `background-repeat:no-repeat`
+  ].join(';');
+}
 </script>
 
 {#if containerSize > 0}
-  <div
-    bind:this={containerEl}
-    class="container"
-    style="width:{containerSize}px; height:{containerSize}px"
-  >
-    {#each positions as originalIdx, i}
-      <button>
-        class="piece"
-        class:selected={selected === i}
-        style="
-          width:{pieceSize}px;
-          height:{pieceSize}px;
-          background-image:url({step.image});
-          background-size:{containerSize}px {containerSize}px;
-          background-position:{bgPos(originalIdx)};
-        "
-        on:click={() => handleClick(i)}
-        aria-label="Pièce {i + 1}"
-      </button>
-    {/each}
-  </div>
+<div
+  bind:this={containerEl}
+  class="container"
+  style="width:{containerSize}px; height:{containerSize}px"
+>
+{#each positions as originalIdx, i}
+  <button
+    class="piece"
+    class:selected={selected === i}
+    style={pieceStyle(originalIdx, pieceSize, containerSize)}
+    on:click={() => handleClick(i)}
+    aria-label="Pièce {i + 1}"
+  ></button>
+{/each}
+</div>
 {/if}
 
 <style>

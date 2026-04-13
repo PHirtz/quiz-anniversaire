@@ -13,6 +13,7 @@
   import Quiz     from '$lib/components/steps/Quiz.svelte';
   import Memory   from '$lib/components/steps/Memory.svelte';
   import Puzzle   from '$lib/components/steps/Puzzle.svelte';
+  import Code     from '$lib/components/steps/Code.svelte';
 
   function onStart() {
   }
@@ -27,7 +28,7 @@
 <div class="petals" aria-hidden="true">
   {#each Array(14) as _, i}
     <span class="petal" style="left:{Math.random()*100}vw; animation-duration:{9+Math.random()*10}s; animation-delay:{Math.random()*15}s; font-size:{0.8+Math.random()}rem">
-      {['🎂','🎈','🎁','🎉','🥳','🍰','🎊','✨'][i % 8]}
+      {['🎂','🎈','🐨','🎁','🎉','🥳','🍰','🐨','🎊','✨'][i % 10]}
     </span>
   {/each}
 </div>
@@ -62,17 +63,20 @@
       <h2>{steps[$current].title}</h2>
       <p class="description">{steps[$current].description}</p>
 
-      {#key $current}
-        {#if steps[$current].type === 'quiz'}
-          <Quiz step={steps[$current]} />
-        {:else if steps[$current].type === 'memory'}
-          <Memory step={steps[$current]} />
-          <button class="skip" on:click={nextStep}>Passer ›</button>
-        {:else if steps[$current].type === 'puzzle'}
-          <Puzzle step={steps[$current]} />
-          <button class="skip" on:click={nextStep}>Passer ›</button>
-        {/if}
-      {/key}
+        {#key $current}
+          {#if steps[$current].type === 'quiz'}
+            <Quiz step={steps[$current]} />
+          {:else if steps[$current].type === 'memory'}
+            <Memory step={steps[$current]} />
+            <button class="skip" on:click={nextStep}>Passer ›</button>
+          {:else if steps[$current].type === 'puzzle'}
+            <Puzzle step={steps[$current]} />
+            <button class="skip" on:click={nextStep}>Passer ›</button>
+          {:else if steps[$current].type === 'code'}
+            <Code step={steps[$current]} />
+            <button class="skip" on:click={nextStep}>Passer ›</button>
+          {/if}
+        {/key}
 
       {#if $feedback}
         <p class="feedback" class:ok={$feedback.startsWith('✅')}>{$feedback}</p>

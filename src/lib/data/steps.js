@@ -1,8 +1,6 @@
-// 🎂 Données du jeu — modifie ici tes questions, puzzles et memory
-
 export const MEMORY_EMOJIS = {
   1: "🎂", 2: "🎈", 3: "🎁", 4: "🎉",
-  5: "🥳", 6: "🍰", 7: "🎊", 8: "🕯️"
+  5: "🥳", 6: "🍰", 7: "🎊", 8: "🐨"
 };
 
 /** @type {import('./types').Step[]} */
@@ -10,23 +8,24 @@ export const steps = [
   {
     type: "quiz",
     title: "Question 1",
-    description: "Quelle est la couleur préférée de [Prénom] ?",
-    aide: "",
-    answer: ["bleu", "bleue"]
+    description: "Quels sports Aurélie n'a pas pratiqué ?",
+    aide: "Pas le droit de demander à la concernée !",
+    options: ["Basketball", "Judo", "Athlétisme", "GRS", "Natation", "Lancer de poids"],
+    answer: ["Basketball"]
   },
   {
     type: "puzzle",
-    title: "Puzzle 1",
+    title: "La naissance d'une déesse",
     description: "Reconstituez l'image !",
-    image: "images/photo1.jpg",
+    image: "/images/photo0.jpg",
     size: 3
   },
   {
-    type: "quiz",
+    type: "code",
     title: "Question 2",
-    description: "Quel est le plat favori de [Prénom] ?",
-    aide: "Demandez à sa mère !",
-    answer: ["pizza", "pâtes"]
+    description: "Dans quel sport a-t-elle été championne de France enfant ?",
+    aide: "Demandez à sa maman si tu ne trouves pas !",
+    code: "GRS"
   },
   {
     type: "memory",
@@ -37,15 +36,16 @@ export const steps = [
   {
     type: "quiz",
     title: "Question 3",
-    description: "En quelle année est né(e) [Prénom] ?",
+    description: "Quel est le second prénom d'Aurélie ?",
     aide: "",
-    answer: ["1990"] // à adapter
+    options: ["Marie", "Madeleine", "Anne", "Colette"],
+    answer: ["Madeleine"]
   },
   {
     type: "puzzle",
-    title: "Puzzle 2",
+    title: "L'enfant parfaite",
     description: "Reconstituez l'image !",
-    image: "images/photo2.jpg",
+    image: "images/photo1.jpg",
     size: 3
   },
   {
@@ -55,15 +55,38 @@ export const steps = [
     pairs: [5, 5, 6, 6, 7, 7, 8, 8]
   },
   {
-    type: "quiz",
+    type: "code",
     title: "Question 4",
-    description: "Quelle est la série préférée de [Prénom] ?",
+    description: "Quel est son animal fetiche ?",
     aide: "",
-    answer: ["friends", "friend"]
+    code: ["KOALA", "koala", "Koala", "KoAlA"]
   },
+  {
+    type: "quiz",
+    title: "Question 5",
+    description: "Quelle est sa plus grande qualité ?",
+    aide: "Il y en a beaucoup, mais il faut n'en choisir qu'une !",
+    options: ["Gentillesse", "Loyauté", "Intelligence", "Drole"],
+    answer: ["Loyauté"]
+  },
+   {
+    type: "quiz",
+    title: "Question 6",
+    description: "Et celle qui lui fait du tord ?",
+    aide: "Et c'est pour ça aussi qu'on l'aime !",
+    options: ["Franchise","Empathie","Curiosité","Gourmandise"],
+    answer: ["Franchise"]
+  }, 
+  {
+    type: "puzzle",
+    title: "L'enfant, La femme, la mère, la sœur, l'amie que tout le monde rêve d'avoir",
+    description: "Reconstituez l'image !",
+    image: "images/photo2.jpg",
+    size: 3
+  }
 ];
 
 export const QUIZ_TOTAL = steps.filter(s => s.type === "quiz").length;
 
 // URL du reset.json (GitHub Pages ou autre hébergement)
-export const RESET_URL = "https://TON_USERNAME.github.io/TON_REPO/reset.json";
+export const RESET_URL = '/reset.json';

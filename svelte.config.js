@@ -1,6 +1,12 @@
-import adapter from '@sveltejs/adapter-auto';
+import adapter from '@sveltejs/adapter-static';
 
 export default {
-  kit: { adapter: adapter() },
-  compilerOptions: { runes: false }
+  kit: {
+    adapter: adapter({
+      fallback: '404.html'
+    }),
+    paths: {
+      base: '/quiz-anniversaire'
+    }
+  }
 };
