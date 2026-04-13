@@ -1,0 +1,58 @@
+/* ===== FONTS ===== */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&display=swap');
+
+/* ===== THÈME ANNIVERSAIRE — or & fête ===== */
+/* 🎨 Pour changer le thème : modifie uniquement ce bloc :root */
+:root {
+  /* Couleurs principales */
+  --accent:       #e07b39;       /* orange fête */
+  --accent-light: #f0a060;
+  --accent-rgb:   224, 123, 57;  /* même valeur en RGB pour les rgba() */
+
+  /* Texte */
+  --ink:          #2d1f0e;
+  --ink-dim:      #6b4f2a;
+  --muted:        #b89468;
+
+  /* Fonds */
+  --bg:           #fdf7ee;
+  --card-bg:      rgba(255, 251, 243, 0.93);
+  --border:       rgba(224, 180, 100, 0.28);
+
+  /* Statuts */
+  --success:      #5a9e6a;
+  --error:        #c96060;
+
+  /* Typographies */
+  --font-title:   'Cinzel', serif;
+  --font-body:    'Cormorant Garamond', serif;
+}
+
+/* ===== RESET ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--ink);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* ===== FOND AQUARELLE ===== */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 10% 10%, rgba(255,215,120,0.3), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 90%  5%, rgba(255,180,100,0.25), transparent 55%),
+    radial-gradient(ellipse 50% 40% at 80% 85%, rgba(255,200,120,0.28), transparent 55%),
+    linear-gradient(160deg, #fdf5e0 0%, #fdf7ee 40%, #fef2e0 100%);
+  pointer-events: none;
+}
