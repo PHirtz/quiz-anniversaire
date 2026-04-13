@@ -15,7 +15,6 @@
   import Puzzle   from '$lib/components/steps/Puzzle.svelte';
 
   function onStart() {
-    // le store teamName est déjà mis à jour par Welcome
   }
 
   onMount(() => {
