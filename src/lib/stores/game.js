@@ -1,8 +1,8 @@
 import { writable, derived, get } from 'svelte/store';
-import { steps, QUIZ_TOTAL, RESET_URL, BLOB_ID } from '$lib/data/steps.js';
+import { steps, QUIZ_TOTAL, RESET_URL, NPOINT_ID } from '$lib/data/steps.js';
 import { isCorrect } from '$lib/utils/normalize.js';
 
-const JSONBLOB_URL = `https://jsonblob.com/api/jsonBlob/${BLOB_ID}`;
+const NPOINT_URL = `https://api.npoint.io/${NPOINT_ID}`;
 
 // ─── État persisté dans localStorage ───────────────────────────────────────
 function persisted(key, defaultValue) {
@@ -19,7 +19,7 @@ export const teamName    = persisted('teamName', '');
 export const userAnswers = persisted('answers', []);
 export const gameOver    = persisted('gameOver', false);
 
-// ─── Timer ─────────────────────────────────────────────
+// ─── Timer ──────────────────────────────────────────────────────────────────
 export const startTime = persisted('startTime', null);
 export const totalTime = persisted('totalTime', null);
 
@@ -95,25 +95,24 @@ export function adminReset() {
   if (code === '49895') resetGame();
 }
 
-// ─── Classement JSONBlob ─────────────────────────────────────────────────────
+// ─── Classement npoint ───────────────────────────────────────────────────────
 export async function saveScore() {
   try {
     const name = get(teamName);
     const s    = get(score);
     const t    = get(totalTime);
 
-    const res = await fetch(base + RESET_URL + '?t=' + Date.now());
+    const res  = await fetch(NPOINT_URL);
     const data = await res.json();
 
-    // Anti-replay : on n'enregistre pas si le joueur a déjà un score
     const exists = data.scores.find(e => e.name === name);
     if (exists) return;
 
     data.scores.push({ name, score: s, time: t, date: Date.now() });
     data.scores.sort((a, b) => b.score - a.score || a.time - b.time);
 
-    await fetch(JSONBLOB_URL, {
-      method: 'PUT',
+    await fetch(NPOINT_URL, {
+      method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
     });
@@ -124,7 +123,7 @@ export async function saveScore() {
 
 export async function fetchScores() {
   try {
-    const res  = await fetch(JSONBLOB_URL);
+    const res  = await fetch(NPOINT_URL);
     const data = await res.json();
     return data.scores || [];
   } catch {
@@ -133,9 +132,9 @@ export async function fetchScores() {
 }
 
 // ─── Vérification reset distant ─────────────────────────────────────────────
-export async function checkRemoteReset() {
+export async function checkRemoteReset(base = '') {
   try {
-    const res  = await fetch(RESET_URL + '?t=' + Date.now());
+    const res  = await fetch(base + RESET_URL + '?t=' + Date.now());
     const data = await res.json();
     const localVersion = parseInt(localStorage.getItem('resetVersion') || '0');
     if (data.version > localVersion) {

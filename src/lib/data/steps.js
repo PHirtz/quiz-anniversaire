@@ -1,14 +1,13 @@
-export const BLOB_ID = '019d8c61-b7c5-7ff8-98aa-6966bb695b8c';
+export const NPOINT_ID = '35c1fc19bca0f09571dc';
 
 export const MEMORY_EMOJIS = {
   1: "🎂", 2: "🎈", 3: "🎁", 4: "🎉",
   5: "🥳", 6: "❤️", 7: "🍩", 8: "🐨",
-  9: "✨", 10: "🎀", 11: "🦌", 12: "🍰", 13: "🎊", 14:"👸🏾",
+  9: "✨", 10: "🎀", 11: "🦌", 12: "🍰", 13: "🎊", 14: "👸🏾",
 };
 
-/** @type {import('./types').Step[]} */
 export const steps = [
-    {
+  {
     type: "puzzle",
     title: "La naissance d'une déesse",
     description: "Reconstituez l'image !",
@@ -67,7 +66,7 @@ export const steps = [
   {
     type: "code",
     title: "Question 5",
-    description: "Quel est son animal fetiche ?",
+    description: "Quel est son animal fétiche ?",
     aide: "",
     code: ["KOALA", "koala", "Koala", "KoAlA"]
   },
@@ -84,21 +83,21 @@ export const steps = [
     type: "quiz",
     title: "Question 7",
     description: "Quelle est sa plus grande qualité ?",
-    aide: "Il y en a beaucoup, mais il en faut qu'une !",
-    options: ["Gentillesse", "Loyauté", "Intelligence", "Drole"],
+    aide: "Il y en a beaucoup, mais il n'en faut qu'une !",
+    options: ["Gentillesse", "Loyauté", "Intelligence", "Drôle"],
     answer: ["Loyauté"]
   },
   {
     type: "quiz",
     title: "Question 8",
-    description: "Et celle qui lui fait du tord ?",
+    description: "Et celle qui lui fait du tort ?",
     aide: "Et c'est pour ça aussi qu'on l'aime !",
-    options: ["Franchise","Empathie","Curiosité","Gourmandise"],
+    options: ["Franchise", "Empathie", "Curiosité", "Gourmandise"],
     answer: ["Franchise"]
-  }, 
+  },
   {
     type: "puzzle",
-    title: "Sa moitié, son ame sœur...",
+    title: "Sa moitié, son âme sœur...",
     description: "Reconstituez l'image !",
     image: "/images/photo3.jpg",
     size: 3
@@ -108,7 +107,7 @@ export const steps = [
     title: "Question 9",
     description: "Quel est son fruit préféré ?",
     aide: "",
-    options: ["Fraise","Mangue","Fruit de la passion","Cerise", "Mirabelle", "Framboise"],
+    options: ["Fraise", "Mangue", "Fruit de la passion", "Cerise", "Mirabelle", "Framboise"],
     answer: ["Mangue"]
   },
   {
@@ -119,7 +118,7 @@ export const steps = [
   },
   {
     type: "puzzle",
-    title: "L'enfant, La femme, la mère, la sœur, l'amie que tout le monde rêve d'avoir",
+    title: "L'enfant, la femme, la mère, la sœur, l'amie que tout le monde rêve d'avoir",
     description: "Reconstituez l'image !",
     image: "/images/photo2.jpg",
     size: 3
@@ -132,6 +131,4 @@ export const steps = [
 ];
 
 export const QUIZ_TOTAL = steps.filter(s => s.type !== "message").length;
-
-// URL du reset.json (GitHub Pages ou autre hébergement)
-export const RESET_URL = '/quiz-anniversaire/reset.json';
+export const RESET_URL = '/reset.json';
