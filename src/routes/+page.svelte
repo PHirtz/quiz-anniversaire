@@ -2,6 +2,7 @@
 
 <script>
   import { onMount } from 'svelte';
+  import { base } from '$app/paths';
   import {
     current, score, teamName, gameOver, feedback,
     nextStep, checkRemoteReset

@@ -134,4 +134,4 @@ export const steps = [
 export const QUIZ_TOTAL = steps.filter(s => s.type !== "message").length;
 
 // URL du reset.json (GitHub Pages ou autre hébergement)
-export const RESET_URL = '/reset.json';
+export const RESET_URL = '/quiz-anniversaire/reset.json';

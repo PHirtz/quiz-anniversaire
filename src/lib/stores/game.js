@@ -102,7 +102,7 @@ export async function saveScore() {
     const s    = get(score);
     const t    = get(totalTime);
 
-    const res  = await fetch(JSONBLOB_URL);
+    const res = await fetch(base + RESET_URL + '?t=' + Date.now());
     const data = await res.json();
 
     // Anti-replay : on n'enregistre pas si le joueur a déjà un score
