@@ -24,6 +24,8 @@
     <span class="icon">🎂</span>
     <div class="title">Jeu d'Anniversaire Biche</div>
     <div class="subtitle">Le grand quizz des invités</div>
+    <p class="p">Tentez de gagner l'un des prix !</p>
+    <p class="missclick">Vous avez jusqu'à 23h pour répondre aux questions, faites attention aux missclick...</p>
   </div>
 
   <div class="divider"><span>✦</span></div>
@@ -84,6 +86,20 @@
     text-transform: uppercase;
     margin-top: 6px;
     opacity: 0.7;
+  }
+
+  .p {
+    font-size: 0.95rem;
+    color: var(--ink-dim);
+    line-height: 1.6;
+    margin-top: 16px;
+  }
+
+  .missclick {
+    font-size: 0.85rem;
+    color: var(--error);
+    margin-top: 8px;
+    font-style: italic;
   }
 
   .divider {

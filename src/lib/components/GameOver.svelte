@@ -36,7 +36,7 @@
 <div class="victory">
   <span class="cake">🎂</span>
   <h2>Bravo {$teamName} !</h2>
-  <p class="subtitle">Vous avez répondu à toutes les questions et terminé le jeu !</p>
+  <p class="subtitle">Vous avez terminé le jeu !</p>
 
   <p class="score-final">Score : <strong>{$score} / {QUIZ_TOTAL}</strong></p>
 
@@ -54,8 +54,12 @@
     <p class="mention">🐨 L'important c'est d'avoir joué !</p>
   {/if}
 
-  <p class="emojis">🎂 🎈 🎉 🐨</p>
-  <p class="no-replay">🔒 Tu as déjà joué, ton score est enregistré !</p>
+  <img 
+    src="https://i.makeagif.com/media/3-17-2024/TwpVZL.gif" 
+    alt="Les Inconnus - J'ai gagné !" 
+    class="gif-victory"
+  />
+  <p class="no-replay">🔒 Ton score est enregistré !</p>
   <button class="admin-btn" on:click={adminReset}>⚙</button>
 </div>
 
@@ -63,6 +67,13 @@
   .victory {
     text-align: center;
     padding: 12px 0;
+  }
+  .gif-victory {
+    width: 220px;
+    height: auto;
+    margin: 16px auto;
+    display: block;
+    border-radius: 12px;
   }
   .cake {
     display: block;

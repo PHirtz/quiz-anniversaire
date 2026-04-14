@@ -1,3 +1,5 @@
+export const BLOB_ID = '019d8c61-b7c5-7ff8-98aa-6966bb695b8c';
+
 export const MEMORY_EMOJIS = {
   1: "🎂", 2: "🎈", 3: "🎁", 4: "🎉",
   5: "🥳", 6: "❤️", 7: "🍩", 8: "🐨",
@@ -82,7 +84,7 @@ export const steps = [
     type: "quiz",
     title: "Question 7",
     description: "Quelle est sa plus grande qualité ?",
-    aide: "Il y en a beaucoup, mais il faut n'en choisir qu'une !",
+    aide: "Il y en a beaucoup, mais il en faut qu'une !",
     options: ["Gentillesse", "Loyauté", "Intelligence", "Drole"],
     answer: ["Loyauté"]
   },
@@ -125,7 +127,7 @@ export const steps = [
   {
     type: "message",
     title: "À ma sœur, mon modèle, mon soleil... 💛",
-    description: "Je n'ai pas les mots pour te dire à quel point je t'aime, c'est tous les ans pareil, je déborde d'amour pour toi.\n\nLorsque je dois t'écrire je finis toujours en larmes, tu sais ce que je ressens, tu sais que mon cœur cesserait de battre sans toi, tu es une partie de moi...\n\nJe suis si fière de la femme que tu es et te souhaite le meilleur.\n\nJoyeux anniversaire ma sista chérie, je t'aime fort fort fort ! 🫶"
+    description: "Je n'ai pas les mots pour te dire à quel point je t'aime, c'est tous les ans pareil, je déborde d'amour pour toi.\n\nLorsque je dois t'écrire je finis toujours en larmes, tu sais ce que je ressens, tu sais que mon cœur cesserait de battre sans toi, tu es une partie de moi...\n\nJe suis si fière de la femme que tu es et te souhaite le meilleur.\n\nJoyeux anniversaire ma sista chérie, je t'aime fort fort FORT ! 🫶"
   }
 ];
 
