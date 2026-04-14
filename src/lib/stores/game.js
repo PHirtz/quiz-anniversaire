@@ -1,6 +1,8 @@
 import { writable, derived, get } from 'svelte/store';
-import { steps, QUIZ_TOTAL, RESET_URL } from '$lib/data/steps.js';
+import { steps, QUIZ_TOTAL, RESET_URL, BLOB_ID } from '$lib/data/steps.js';
 import { isCorrect } from '$lib/utils/normalize.js';
+
+const JSONBLOB_URL = `https://jsonblob.com/api/jsonBlob/${BLOB_ID}`;
 
 // ─── État persisté dans localStorage ───────────────────────────────────────
 function persisted(key, defaultValue) {
@@ -17,7 +19,7 @@ export const teamName    = persisted('teamName', '');
 export const userAnswers = persisted('answers', []);
 export const gameOver    = persisted('gameOver', false);
 
-// ─── Timer (déclaré tôt car utilisé dans resetGame et nextStep) ─────────────
+// ─── Timer ─────────────────────────────────────────────
 export const startTime = persisted('startTime', null);
 export const totalTime = persisted('totalTime', null);
 
@@ -66,6 +68,7 @@ export function nextStep() {
     const next = c + 1;
     if (next >= steps.length) {
       stopTimer();
+      saveScore();
       gameOver.set(true);
     }
     return next;
@@ -92,6 +95,43 @@ export function adminReset() {
   if (code === '49895') resetGame();
 }
 
+// ─── Classement JSONBlob ─────────────────────────────────────────────────────
+export async function saveScore() {
+  try {
+    const name = get(teamName);
+    const s    = get(score);
+    const t    = get(totalTime);
+
+    const res  = await fetch(JSONBLOB_URL);
+    const data = await res.json();
+
+    // Anti-replay : on n'enregistre pas si le joueur a déjà un score
+    const exists = data.scores.find(e => e.name === name);
+    if (exists) return;
+
+    data.scores.push({ name, score: s, time: t, date: Date.now() });
+    data.scores.sort((a, b) => b.score - a.score || a.time - b.time);
+
+    await fetch(JSONBLOB_URL, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+  } catch {
+    // silencieux
+  }
+}
+
+export async function fetchScores() {
+  try {
+    const res  = await fetch(JSONBLOB_URL);
+    const data = await res.json();
+    return data.scores || [];
+  } catch {
+    return [];
+  }
+}
+
 // ─── Vérification reset distant ─────────────────────────────────────────────
 export async function checkRemoteReset() {
   try {
@@ -105,6 +145,6 @@ export async function checkRemoteReset() {
       location.reload();
     }
   } catch {
-    // silencieux — pas de connexion ou fichier absent
+    // silencieux
   }
 }
