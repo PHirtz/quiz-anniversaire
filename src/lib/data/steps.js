@@ -59,7 +59,7 @@ export const steps = [
     type: "puzzle",
     title: "L'enfant parfaite",
     description: "Reconstituez l'image !",
-    image: "images/photo1.jpg",
+    image: "/images/photo1.jpg",
     size: 3
   },
   {
@@ -98,7 +98,7 @@ export const steps = [
     type: "puzzle",
     title: "Sa moitié, son ame sœur...",
     description: "Reconstituez l'image !",
-    image: "images/photo3.jpg",
+    image: "/images/photo3.jpg",
     size: 3
   },
   {
@@ -119,7 +119,7 @@ export const steps = [
     type: "puzzle",
     title: "L'enfant, La femme, la mère, la sœur, l'amie que tout le monde rêve d'avoir",
     description: "Reconstituez l'image !",
-    image: "images/photo2.jpg",
+    image: "/images/photo2.jpg",
     size: 3
   },
   {
