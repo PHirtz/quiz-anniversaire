@@ -1,13 +1,9 @@
-<svelte:options runes={false} />
 <script>
-  import { nextStep } from '$lib/stores/game.js';
+  import { nextStep, addPoint } from '$lib/stores/game.js';
   import { MEMORY_EMOJIS } from '$lib/data/steps.js';
-
   export let step;
 
-  // Mélange les cartes
   let cards = step.pairs.slice().sort(() => Math.random() - 0.5);
-
   let first  = null;
   let second = null;
   let busy   = false;
@@ -15,10 +11,8 @@
 
   function flip(i) {
     if (busy || states[i].matched || i === first) return;
-
     states[i].flipped = true;
-    states = [...states]; // trigger reactivity
-
+    states = [...states];
     if (first === null) {
       first = i;
     } else {
@@ -28,8 +22,8 @@
         states[second].matched = true;
         states = [...states];
         first = second = null;
-
         if (states.every(s => s.matched)) {
+          addPoint(); 
           setTimeout(nextStep, 1800);
         }
       } else {

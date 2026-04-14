@@ -1,5 +1,6 @@
 <svelte:options runes={false} />
 <script>
+  import { base } from '$app/paths';
   import { submitQuiz } from '$lib/stores/game.js';
   export let step;
 
@@ -18,6 +19,11 @@
     submitQuiz(selected, step);
   }
 </script>
+
+
+{#if step.image}
+  <img src="{base}{step.image}" alt="Devinez !" class="question-img" />
+{/if}
 
 {#if step.aide}
   <p class="aide">💡 {step.aide}</p>
@@ -83,6 +89,14 @@
     border-color: var(--accent);
     color: var(--accent);
     font-weight: 600;
+  }
+
+  .question-img {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 14px;
+    object-fit: cover;
+    max-height: 220px;
   }
 
   .valider {

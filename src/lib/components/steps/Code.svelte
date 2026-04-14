@@ -1,6 +1,7 @@
 <svelte:options runes={false} />
 <script>
   import { submitQuiz } from '$lib/stores/game.js';
+  import { base } from '$app/paths';
   export let step;
 
   const codeRef = Array.isArray(step.code) ? step.code[0] : step.code;
@@ -8,6 +9,7 @@
 
   let digits = Array(length).fill('');
   let inputs = [];
+  
 
   function onInput(i, e) {
     digits[i] = e.target.value.slice(-1).toUpperCase();
@@ -30,6 +32,9 @@
 
 {#if step.aide}
   <p class="aide">💡 {step.aide}</p>
+{/if}
+{#if step.image}
+  <img src="{base}{step.image}" alt="Devinez !" class="question-img" />
 {/if}
 
 <div class="digits">
@@ -69,6 +74,14 @@
     gap: 10px;
     margin: 20px 0 8px;
     flex-wrap: wrap;
+  }
+
+  .question-img {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 14px;
+    object-fit: cover;
+    max-height: 220px;
   }
 
   input {

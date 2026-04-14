@@ -1,6 +1,6 @@
 <svelte:options runes={false} />
 <script>
-  import { teamName } from '$lib/stores/game.js';
+  import { teamName, startTimer } from '$lib/stores/game.js';
 
   export let onStart;
 
@@ -11,6 +11,7 @@
     if (!inputValue.trim()) { error = true; return; }
     teamName.set(inputValue.trim());
     onStart();
+    startTimer();
   }
 
   function onKeydown(e) {

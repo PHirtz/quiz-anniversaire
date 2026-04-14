@@ -43,6 +43,17 @@
       <GameOver />
     </div>
 
+  {:else if steps[$current].type === 'message'}
+    <div class="card message-card">
+      <h2>{steps[$current].title}</h2>
+      <div class="message-body">
+        {#each steps[$current].description.split('\n') as line}
+          <p>{line}</p>
+        {/each}
+      </div>
+      <button class="skip" on:click={nextStep}>Continuer ›</button>
+    </div>
+
   {:else}
     <header>
       <h1>🎂 Quizz</h1>
@@ -87,9 +98,19 @@
 </main>
 
 <style>
+
+  .message-card { text-align: center; }
+  .message-body p { 
+    margin-bottom: 14px; 
+    line-height: 1.8; 
+    font-style: italic; 
+    color: var(--ink-dim);
+  }
+
   .app { position:relative; z-index:1; width:100%; max-width:460px; padding:24px 16px 48px; margin:0 auto; }
   header { display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; }
   header h1 { font-family:var(--font-title); font-size:1rem; font-weight:400; color:var(--accent); letter-spacing:.12em; }
+  .card { background:var(--card-bg); border:1px solid rgba(var(--accent-rgb),.22); border-radius:24px; padding:32px 28px; box-shadow:0 8px 40px rgba(0,0,0,.08),inset 0 1px 0 rgba(255,255,255,.85); backdrop-filter:blur(10px); position:relative; z-index:20; }
   .progress-text { font-family:var(--font-title); font-size:.7rem; letter-spacing:.1em; color:var(--ink-dim); opacity:.8; }
   .meta { display:flex; gap:8px; margin-bottom:6px; flex-wrap:wrap; }
   .team-badge, .score-badge { font-family:var(--font-title); font-size:.72rem; letter-spacing:.1em; color:var(--accent); padding:4px 12px; border:1px solid var(--border); border-radius:20px; background:rgba(var(--accent-rgb),.06); }

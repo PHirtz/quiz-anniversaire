@@ -1,10 +1,18 @@
 export const MEMORY_EMOJIS = {
   1: "🎂", 2: "🎈", 3: "🎁", 4: "🎉",
-  5: "🥳", 6: "🍰", 7: "🎊", 8: "🐨"
+  5: "🥳", 6: "❤️", 7: "🍩", 8: "🐨",
+  9: "✨", 10: "🎀", 11: "🦌", 12: "🍰", 13: "🎊", 14:"👸🏾",
 };
 
 /** @type {import('./types').Step[]} */
 export const steps = [
+    {
+    type: "puzzle",
+    title: "La naissance d'une déesse",
+    description: "Reconstituez l'image !",
+    image: "/images/photo0.jpg",
+    size: 3
+  },
   {
     type: "quiz",
     title: "Question 1",
@@ -12,13 +20,6 @@ export const steps = [
     aide: "Pas le droit de demander à la concernée !",
     options: ["Basketball", "Judo", "Athlétisme", "GRS", "Natation", "Lancer de poids"],
     answer: ["Basketball"]
-  },
-  {
-    type: "puzzle",
-    title: "La naissance d'une déesse",
-    description: "Reconstituez l'image !",
-    image: "/images/photo0.jpg",
-    size: 3
   },
   {
     type: "code",
@@ -34,12 +35,25 @@ export const steps = [
     pairs: [1, 1, 2, 2, 3, 3, 4, 4]
   },
   {
-    type: "quiz",
+    type: "code",
     title: "Question 3",
+    description: "Quel est le titre de ce manga ?",
+    image: "/images/devinette1.jpg",
+    code: "Jeanne et Serge"
+  },
+  {
+    type: "quiz",
+    title: "Question 4",
     description: "Quel est le second prénom d'Aurélie ?",
     aide: "",
     options: ["Marie", "Madeleine", "Anne", "Colette"],
     answer: ["Madeleine"]
+  },
+  {
+    type: "memory",
+    title: "Memory 2",
+    description: "Retrouvez toutes les paires !",
+    pairs: [5, 5, 6, 6, 7, 7, 8, 8]
   },
   {
     type: "puzzle",
@@ -49,29 +63,32 @@ export const steps = [
     size: 3
   },
   {
-    type: "memory",
-    title: "Memory 2",
-    description: "Retrouvez toutes les paires !",
-    pairs: [5, 5, 6, 6, 7, 7, 8, 8]
-  },
-  {
     type: "code",
-    title: "Question 4",
+    title: "Question 5",
     description: "Quel est son animal fetiche ?",
     aide: "",
     code: ["KOALA", "koala", "Koala", "KoAlA"]
   },
   {
     type: "quiz",
-    title: "Question 5",
+    title: "Question 6",
+    description: "Quel est son plat préféré ?",
+    aide: "Personne le fait mieux que Maman, elle attend de longs mois pour en manger !",
+    image: "/images/devinette2.jpg",
+    options: ["Fumbwa", "Bourguignon", "Dongo Dongo", "Couscous Royal"],
+    answer: ["Dongo Dongo"]
+  },
+  {
+    type: "quiz",
+    title: "Question 7",
     description: "Quelle est sa plus grande qualité ?",
     aide: "Il y en a beaucoup, mais il faut n'en choisir qu'une !",
     options: ["Gentillesse", "Loyauté", "Intelligence", "Drole"],
     answer: ["Loyauté"]
   },
-   {
+  {
     type: "quiz",
-    title: "Question 6",
+    title: "Question 8",
     description: "Et celle qui lui fait du tord ?",
     aide: "Et c'est pour ça aussi qu'on l'aime !",
     options: ["Franchise","Empathie","Curiosité","Gourmandise"],
@@ -79,14 +96,40 @@ export const steps = [
   }, 
   {
     type: "puzzle",
+    title: "Sa moitié, son ame sœur...",
+    description: "Reconstituez l'image !",
+    image: "images/photo3.jpg",
+    size: 3
+  },
+  {
+    type: "quiz",
+    title: "Question 9",
+    description: "Quel est son fruit préféré ?",
+    aide: "",
+    options: ["Fraise","Mangue","Fruit de la passion","Cerise", "Mirabelle", "Framboise"],
+    answer: ["Mangue"]
+  },
+  {
+    type: "memory",
+    title: "Memory 3",
+    description: "Retrouvez toutes les paires !",
+    pairs: [9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14]
+  },
+  {
+    type: "puzzle",
     title: "L'enfant, La femme, la mère, la sœur, l'amie que tout le monde rêve d'avoir",
     description: "Reconstituez l'image !",
     image: "images/photo2.jpg",
     size: 3
+  },
+  {
+    type: "message",
+    title: "À ma sœur, mon modèle, mon soleil... 💛",
+    description: "Je n'ai pas les mots pour te dire à quel point je t'aime, c'est tous les ans pareil, je déborde d'amour pour toi.\n\nLorsque je dois t'écrire je finis toujours en larmes, tu sais ce que je ressens, tu sais que mon cœur cesserait de battre sans toi, tu es une partie de moi...\n\nJe suis si fière de la femme que tu es et te souhaite le meilleur.\n\nJoyeux anniversaire ma sista chérie, je t'aime fort fort fort ! 🫶"
   }
 ];
 
-export const QUIZ_TOTAL = steps.filter(s => s.type === "quiz").length;
+export const QUIZ_TOTAL = steps.filter(s => s.type !== "message").length;
 
 // URL du reset.json (GitHub Pages ou autre hébergement)
 export const RESET_URL = '/reset.json';

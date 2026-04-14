@@ -1,18 +1,14 @@
-<svelte:options runes={false} />
 <script>
   import { onMount } from 'svelte';
-  import { nextStep } from '$lib/stores/game.js';
-
+  import { nextStep, addPoint } from '$lib/stores/game.js';
+  import { base } from '$app/paths';
   export let step;
 
-  const SIZE    = step.size;
-  const TOTAL   = SIZE * SIZE;
-
-  // Positions actuelles (mélangées) → idx original de chaque case
+  const SIZE  = step.size;
+  const TOTAL = SIZE * SIZE;
   let positions = Array.from({ length: TOTAL }, (_, i) => i)
     .sort(() => Math.random() - 0.5);
-
-  let selected = null;       // index de la pièce sélectionnée
+  let selected = null;
   let containerSize = 0;
   let containerEl;
 
@@ -22,17 +18,10 @@
 
   $: pieceSize = containerSize / SIZE;
 
-  function bgPos(originalIdx) {
-    const col = originalIdx % SIZE;
-    const row = Math.floor(originalIdx / SIZE);
-    return `-${col * pieceSize}px -${row * pieceSize}px`;
-  }
-
   function handleClick(i) {
     if (selected === null) {
       selected = i;
     } else {
-      // Échange
       [positions[selected], positions[i]] = [positions[i], positions[selected]];
       positions = [...positions];
       selected = null;
@@ -42,22 +31,23 @@
 
   function checkSolved() {
     if (positions.every((orig, pos) => orig === pos)) {
+      addPoint(); 
       setTimeout(nextStep, 2500);
     }
   }
 
-function pieceStyle(originalIdx, pSize, cSize) {
-  const col = originalIdx % SIZE;
-  const row = Math.floor(originalIdx / SIZE);
-  return [
-    `width:${pSize}px`,
-    `height:${pSize}px`,
-    `background-image:url('${step.image}')`,
-    `background-size:${cSize}px ${cSize}px`,
-    `background-position:-${col * pSize}px -${row * pSize}px`,
-    `background-repeat:no-repeat`
-  ].join(';');
-}
+  function pieceStyle(originalIdx, pSize, cSize) {
+    const col = originalIdx % SIZE;
+    const row = Math.floor(originalIdx / SIZE);
+    return [
+      `width:${pSize}px`,
+      `height:${pSize}px`,
+      `background-image:url('${base}${step.image}')`,
+      `background-size:${cSize}px ${cSize}px`,
+      `background-position:-${col * pSize}px -${row * pSize}px`,
+      `background-repeat:no-repeat`
+    ].join(';');
+  }
 </script>
 
 {#if containerSize > 0}

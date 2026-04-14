@@ -3,7 +3,6 @@ import { steps, QUIZ_TOTAL, RESET_URL } from '$lib/data/steps.js';
 import { isCorrect } from '$lib/utils/normalize.js';
 
 // ─── État persisté dans localStorage ───────────────────────────────────────
-
 function persisted(key, defaultValue) {
   const stored = localStorage.getItem(key);
   const initial = stored !== null ? JSON.parse(stored) : defaultValue;
@@ -18,42 +17,57 @@ export const teamName    = persisted('teamName', '');
 export const userAnswers = persisted('answers', []);
 export const gameOver    = persisted('gameOver', false);
 
-// ─── State UI (non persisté) ────────────────────────────────────────────────
+// ─── Timer (déclaré tôt car utilisé dans resetGame et nextStep) ─────────────
+export const startTime = persisted('startTime', null);
+export const totalTime = persisted('totalTime', null);
 
-export const feedback     = writable('');
+export function startTimer() {
+  startTime.set(Date.now());
+  totalTime.set(null);
+}
+
+export function stopTimer() {
+  const start = get(startTime);
+  if (start) totalTime.set(Math.floor((Date.now() - start) / 1000));
+}
+
+// ─── State UI (non persisté) ────────────────────────────────────────────────
+export const feedback      = writable('');
 export const transitioning = writable(false);
 
 // ─── Dérivés ────────────────────────────────────────────────────────────────
-
-export const currentStep  = derived(current, $c => steps[$c]);
-export const progress     = derived(current, $c => ($c / steps.length) * 100);
-export const quizTotal    = QUIZ_TOTAL;
+export const currentStep = derived(current, $c => steps[$c]);
+export const progress    = derived(current, $c => ($c / steps.length) * 100);
+export const quizTotal   = QUIZ_TOTAL;
 
 // ─── Actions ────────────────────────────────────────────────────────────────
-
 export function submitQuiz(value, step) {
   if (get(transitioning)) return;
   transitioning.set(true);
-
   userAnswers.update(answers => {
     answers[get(current)] = value;
     return answers;
   });
-
   if (isCorrect(value, step.answer)) {
     score.update(s => s + 1);
     feedback.set('✅ Bonne réponse !');
   } else {
     feedback.set('❌ Raté');
   }
-
   setTimeout(nextStep, 1000);
+}
+
+export function addPoint() {
+  score.update(s => s + 1);
 }
 
 export function nextStep() {
   current.update(c => {
     const next = c + 1;
-    if (next >= steps.length) gameOver.set(true);
+    if (next >= steps.length) {
+      stopTimer();
+      gameOver.set(true);
+    }
     return next;
   });
   feedback.set('');
@@ -69,16 +83,21 @@ export function resetGame() {
   gameOver.set(false);
   feedback.set('');
   transitioning.set(false);
+  startTime.set(null);
+  totalTime.set(null);
+}
+
+export function adminReset() {
+  const code = prompt('Code admin :');
+  if (code === '49895') resetGame();
 }
 
 // ─── Vérification reset distant ─────────────────────────────────────────────
-
 export async function checkRemoteReset() {
   try {
     const res  = await fetch(RESET_URL + '?t=' + Date.now());
     const data = await res.json();
     const localVersion = parseInt(localStorage.getItem('resetVersion') || '0');
-
     if (data.version > localVersion) {
       localStorage.clear();
       localStorage.setItem('resetVersion', data.version);
