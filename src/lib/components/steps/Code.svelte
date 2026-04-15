@@ -6,15 +6,14 @@
 
   const codeRef = Array.isArray(step.code) ? step.code[0] : step.code;
   const length = codeRef.length;
-
   let digits = Array(length).fill('');
   let inputs = [];
-  
 
   function onInput(i, e) {
     digits[i] = e.target.value.slice(-1).toUpperCase();
     e.target.value = digits[i];
     if (digits[i] && i < length - 1) inputs[i + 1]?.focus();
+    setTimeout(() => e.target.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
   }
 
   function onKeydown(i, e) {
@@ -33,6 +32,7 @@
 {#if step.aide}
   <p class="aide">💡 {step.aide}</p>
 {/if}
+
 {#if step.image}
   <img src="{base}{step.image}" alt="Devinez !" class="question-img" />
 {/if}
@@ -48,7 +48,10 @@
       value={digits[i]}
       on:input={e => onInput(i, e)}
       on:keydown={e => onKeydown(i, e)}
-      on:focus={e => e.target.select()}
+      on:focus={e => {
+        e.target.select();
+        setTimeout(() => e.target.scrollIntoView({ behavior: 'smooth', block: 'center' }), 150);
+      }}
     />
   {/each}
 </div>
@@ -67,15 +70,14 @@
     border: 1px dashed rgba(var(--accent-rgb), 0.38);
     margin: 12px 0;
   }
-
   .digits {
     display: flex;
     justify-content: center;
     gap: 10px;
     margin: 20px 0 8px;
     flex-wrap: wrap;
+    scroll-margin-bottom: 200px;
   }
-
   .question-img {
     width: 100%;
     border-radius: 12px;
@@ -83,7 +85,6 @@
     object-fit: cover;
     max-height: 220px;
   }
-
   input {
     width: 48px;
     height: 58px;
@@ -99,17 +100,14 @@
     transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
     caret-color: var(--accent);
   }
-
   input:focus {
     border-color: var(--accent);
     background: rgba(var(--accent-rgb), 0.1);
     box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.18);
   }
-
   input:not(:placeholder-shown) {
     background: rgba(var(--accent-rgb), 0.08);
   }
-
   button {
     width: 100%;
     margin-top: 12px;
@@ -124,7 +122,6 @@
     cursor: pointer;
     transition: all 0.3s;
   }
-
   button:hover {
     border-color: var(--accent);
     box-shadow: 0 4px 20px rgba(var(--accent-rgb), 0.22);

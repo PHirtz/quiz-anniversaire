@@ -7,10 +7,15 @@
   let selected = [];
 
   function toggle(option) {
-    if (selected.includes(option)) {
-      selected = selected.filter(o => o !== option);
+    const isMultiple = Array.isArray(step.answer) && step.answer.length > 1;
+    if (isMultiple) {
+      if (selected.includes(option)) {
+        selected = selected.filter(o => o !== option);
+      } else {
+        selected = [...selected, option];
+      }
     } else {
-      selected = [...selected, option];
+      selected = selected.includes(option) ? [] : [option];
     }
   }
 
@@ -19,7 +24,6 @@
     submitQuiz(selected, step);
   }
 </script>
-
 
 {#if step.image}
   <img src="{base}{step.image}" alt="Devinez !" class="question-img" />
@@ -57,15 +61,14 @@
     border: 1px dashed rgba(var(--accent-rgb), 0.38);
     margin: 12px 0;
   }
-
   .options {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
     margin-top: 16px;
     justify-content: center;
+    padding-bottom: 120px;
   }
-
   .option {
     padding: 12px 20px;
     border-radius: 12px;
@@ -77,20 +80,17 @@
     cursor: pointer;
     transition: all 0.2s;
   }
-
   .option:hover {
     border-color: var(--accent);
     box-shadow: 0 4px 14px rgba(var(--accent-rgb), 0.18);
     transform: translateY(-1px);
   }
-
   .option.selected {
     background: rgba(var(--accent-rgb), 0.15);
     border-color: var(--accent);
     color: var(--accent);
     font-weight: 600;
   }
-
   .question-img {
     width: 100%;
     border-radius: 12px;
@@ -98,7 +98,6 @@
     object-fit: cover;
     max-height: 220px;
   }
-
   .valider {
     width: 100%;
     margin-top: 16px;
@@ -113,12 +112,10 @@
     cursor: pointer;
     transition: all 0.3s;
   }
-
   .valider:disabled {
     opacity: 0.4;
     cursor: not-allowed;
   }
-
   .valider:not(:disabled):hover {
     border-color: var(--accent);
     box-shadow: 0 4px 20px rgba(var(--accent-rgb), 0.22);
