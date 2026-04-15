@@ -23,6 +23,13 @@ export const steps = [
     answer: ["Basketball"]
   },
   {
+    type: "anagram",
+    title: "Anagramme 1",
+    description: "Reconstituez le mot !",
+    aide: "C'est sa couleur préférée",
+    answer: "ROSE"
+  },
+  {
     type: "code",
     title: "Question 2",
     description: "Dans quel sport a-t-elle été championne de France enfant ?",
@@ -51,6 +58,13 @@ export const steps = [
     answer: ["Madeleine"]
   },
   {
+    type: "anagram",
+    title: "Anagramme 2",
+    description: "Reconstituez le mot !",
+    aide: "Sa phobie ...️",
+    answer: "ARAIGNEES"
+  },
+  {
     type: "memory",
     title: "Memory 2",
     description: "Retrouvez toutes les paires !",
@@ -71,6 +85,13 @@ export const steps = [
     code: ["KOALA", "koala", "Koala", "KoAlA"]
   },
   {
+    type: "anagram",
+    title: "Anagramme 3",
+    description: "Reconstituez le mot !",
+    aide: "De qui a-t-elle le plus peur ? 😏",
+    answer: "PERSONNE"
+  },
+  {
     type: "quiz",
     title: "Question 6",
     description: "Quel est son plat préféré ?",
@@ -87,6 +108,7 @@ export const steps = [
     options: ["Gentillesse", "Loyauté", "Intelligence", "Drôle"],
     answer: ["Loyauté"]
   },
+
   {
     type: "quiz",
     title: "Question 8",
@@ -111,10 +133,24 @@ export const steps = [
     answer: ["Mangue"]
   },
   {
+    type: "anagram",
+    title: "Anagramme 4",
+    description: "Reconstituez le mot !",
+    aide: "Sa plus grande peur (fun fact : Elle voulait se construire un bunker 😊)",
+    answer: "ATTENTATS"
+  },
+  {
     type: "memory",
     title: "Memory 3",
     description: "Retrouvez toutes les paires !",
     pairs: [9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14]
+  },
+  {
+    type: "anagram",
+    title: "Anagramme 5",
+    description: "Reconstituez le mot !",
+    aide: "C'est la reine du game :",
+    answer: "MONOPOLI"
   },
   {
     type: "puzzle",

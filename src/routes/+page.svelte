@@ -15,6 +15,7 @@
   import Memory   from '$lib/components/steps/Memory.svelte';
   import Puzzle   from '$lib/components/steps/Puzzle.svelte';
   import Code     from '$lib/components/steps/Code.svelte';
+  import Anagram from '$lib/components/steps/Anagram.svelte';
 
   function onStart() {}
 
@@ -85,6 +86,9 @@
           <button class="skip" on:click={nextStep}>Passer ›</button>
         {:else if steps[$current].type === 'code'}
           <Code step={steps[$current]} />
+          <button class="skip" on:click={nextStep}>Passer ›</button>
+        {:else if steps[$current].type === 'anagram'}
+          <Anagram step={steps[$current]} />
           <button class="skip" on:click={nextStep}>Passer ›</button>
         {/if}
       {/key}
