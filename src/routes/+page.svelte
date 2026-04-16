@@ -27,7 +27,7 @@
 </script>
 
 <div class="petals" aria-hidden="true">
-  {#each Array(14) as _, i}
+    {#each Array.from({length: 14}) as _, i}
     <span class="petal" style="left:{Math.random()*100}vw; animation-duration:{9+Math.random()*10}s; animation-delay:{Math.random()*15}s; font-size:{0.8+Math.random()}rem">
       {['🎂','🎈','🐨','🎁','🎉','🥳','🍰','🐨','🎊','✨'][i % 10]}
     </span>

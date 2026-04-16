@@ -6,6 +6,7 @@ const NPOINT_URL = `https://api.npoint.io/${NPOINT_ID}`;
 
 // ─── État persisté dans localStorage ───────────────────────────────────────
 function persisted(key, defaultValue) {
+  if (typeof localStorage === 'undefined') return writable(defaultValue);
   const stored = localStorage.getItem(key);
   const initial = stored !== null ? JSON.parse(stored) : defaultValue;
   const store = writable(initial);
@@ -105,9 +106,6 @@ export async function saveScore() {
     const res  = await fetch(NPOINT_URL);
     const data = await res.json();
 
-    const exists = data.scores.find(e => e.name === name);
-    if (exists) return;
-
     data.scores.push({ name, score: s, time: t, date: Date.now() });
     data.scores.sort((a, b) => b.score - a.score || a.time - b.time);
 
@@ -146,19 +144,4 @@ export async function checkRemoteReset(base = '') {
   } catch {
     // silencieux
   }
-}
-
-// ─── Sauvegarde des scores ─────────────────────────────────────────────
-const exists = data.scores.find(e => e.name === name);
-if (exists) {
-  // Met à jour seulement si meilleur score
-  if (s > exists.score || (s === exists.score && t < exists.time)) {
-    exists.score = s;
-    exists.time = t;
-    exists.date = Date.now();
-  } else {
-    return;
-  }
-} else {
-  data.scores.push({ name, score: s, time: t, date: Date.now() });
 }
