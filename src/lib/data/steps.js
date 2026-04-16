@@ -23,13 +23,6 @@ export const steps = [
     answer: ["Basketball"]
   },
   {
-    type: "anagram",
-    title: "Anagramme 1",
-    description: "Reconstituez le mot !",
-    aide: "C'est sa couleur préférée",
-    answer: "ROSE"
-  },
-  {
     type: "code",
     title: "Question 2",
     description: "Dans quel sport a-t-elle été championne de France enfant ?",
@@ -41,6 +34,13 @@ export const steps = [
     title: "Memory 1",
     description: "Retrouvez toutes les paires !",
     pairs: [1, 1, 2, 2, 3, 3, 4, 4]
+  },
+  {
+    type: "anagram",
+    title: "Anagramme 1",
+    description: "Reconstituez le mot !",
+    aide: "Sa phobie ...️",
+    answer: "ARAIGNEES"
   },
   {
     type: "code",
@@ -58,13 +58,6 @@ export const steps = [
     answer: ["Madeleine"]
   },
   {
-    type: "anagram",
-    title: "Anagramme 2",
-    description: "Reconstituez le mot !",
-    aide: "Sa phobie ...️",
-    answer: "ARAIGNEES"
-  },
-  {
     type: "memory",
     title: "Memory 2",
     description: "Retrouvez toutes les paires !",
@@ -78,18 +71,18 @@ export const steps = [
     size: 3
   },
   {
+    type: "anagram",
+    title: "Anagramme 2",
+    description: "Reconstituez le mot !",
+    aide: "De qui a-t-elle le plus peur ? 😏",
+    answer: "PERSONNE"
+  },
+  {
     type: "code",
     title: "Question 5",
     description: "Quel est son animal fétiche ?",
     aide: "",
     code: ["KOALA", "koala", "Koala", "KoAlA"]
-  },
-  {
-    type: "anagram",
-    title: "Anagramme 3",
-    description: "Reconstituez le mot !",
-    aide: "De qui a-t-elle le plus peur ? 😏",
-    answer: "PERSONNE"
   },
   {
     type: "quiz",
@@ -118,6 +111,13 @@ export const steps = [
     answer: ["Franchise"]
   },
   {
+    type: "anagram",
+    title: "Anagramme 3",
+    description: "Reconstituez le mot !",
+    aide: "Sa plus grande peur (fun fact : Elle voulait se construire un bunker 😊)",
+    answer: "ATTENTATS"
+  },
+  {
     type: "puzzle",
     title: "Sa moitié, son âme sœur...",
     description: "Reconstituez l'image !",
@@ -133,13 +133,6 @@ export const steps = [
     answer: ["Mangue"]
   },
   {
-    type: "anagram",
-    title: "Anagramme 4",
-    description: "Reconstituez le mot !",
-    aide: "Sa plus grande peur (fun fact : Elle voulait se construire un bunker 😊)",
-    answer: "ATTENTATS"
-  },
-  {
     type: "memory",
     title: "Memory 3",
     description: "Retrouvez toutes les paires !",
@@ -147,7 +140,7 @@ export const steps = [
   },
   {
     type: "anagram",
-    title: "Anagramme 5",
+    title: "Anagramme 4",
     description: "Reconstituez le mot !",
     aide: "C'est la reine du game :",
     answer: "MONOPOLI"
