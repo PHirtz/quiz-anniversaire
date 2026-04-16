@@ -147,3 +147,18 @@ export async function checkRemoteReset(base = '') {
     // silencieux
   }
 }
+
+// ─── Sauvegarde des scores ─────────────────────────────────────────────
+const exists = data.scores.find(e => e.name === name);
+if (exists) {
+  // Met à jour seulement si meilleur score
+  if (s > exists.score || (s === exists.score && t < exists.time)) {
+    exists.score = s;
+    exists.time = t;
+    exists.date = Date.now();
+  } else {
+    return;
+  }
+} else {
+  data.scores.push({ name, score: s, time: t, date: Date.now() });
+}
