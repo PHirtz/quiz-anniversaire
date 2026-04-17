@@ -67,7 +67,6 @@
     gap: 10px;
     margin-top: 16px;
     justify-content: center;
-    padding-bottom: 120px;
   }
   .option {
     padding: 12px 20px;

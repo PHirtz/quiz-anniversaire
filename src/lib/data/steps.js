@@ -54,7 +54,7 @@ export const steps = [
     title: "Question 4",
     description: "Quel est le second prénom d'Aurélie ?",
     aide: "",
-    options: ["Marie", "Madeleine", "Anne", "Colette"],
+    options: ["Marie", "Madeleine", "Anne", "Colette", "Elisabeth", "Sophie"],
     answer: ["Madeleine"]
   },
   {
@@ -90,7 +90,7 @@ export const steps = [
     description: "Quel est son plat préféré ?",
     aide: "Personne le fait mieux que Maman, elle attend de longs mois pour en manger !",
     image: "/images/devinette2.jpg",
-    options: ["Fumbwa", "Bourguignon", "Dongo Dongo", "Couscous Royal"],
+    options: ["Fumbwa", "Bourguignon", "Dongo Dongo", "Couscous Royal", "Sushi", "Mafé"],
     answer: ["Dongo Dongo"]
   },
   {
@@ -98,7 +98,7 @@ export const steps = [
     title: "Question 7",
     description: "Quelle est sa plus grande qualité ?",
     aide: "Il y en a beaucoup, mais il n'en faut qu'une !",
-    options: ["Gentillesse", "Loyauté", "Intelligence", "Drôle"],
+    options: ["Gentillesse", "Loyauté", "Intelligence", "Drôle", "Sportivité", "Créativité"],
     answer: ["Loyauté"]
   },
 
@@ -107,7 +107,7 @@ export const steps = [
     title: "Question 8",
     description: "Et celle qui lui fait du tort ?",
     aide: "Et c'est pour ça aussi qu'on l'aime !",
-    options: ["Franchise", "Empathie", "Curiosité", "Gourmandise"],
+    options: ["Franchise", "Empathie", "Curiosité", "Gourmandise", "Têtu", "Sensible"],
     answer: ["Franchise"]
   },
   {
@@ -143,7 +143,7 @@ export const steps = [
     title: "Anagramme 4",
     description: "Reconstitue le mot !",
     aide: "C'est la reine du game :",
-    answer: "MONOPOLI"
+    answer: "MONOPOLY"
   },
   {
     type: "puzzle",
