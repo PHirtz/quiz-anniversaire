@@ -10,14 +10,14 @@ export const steps = [
   {
     type: "puzzle",
     title: "La naissance d'une déesse",
-    description: "Reconstituez l'image !",
+    description: "Reconstitue l'image !",
     image: "/images/photo0.jpg",
     size: 3
   },
   {
     type: "quiz",
     title: "Question 1",
-    description: "Quels sports Aurélie n'a pas pratiqué ?",
+    description: "Quels sports Aurélie n'a pas pratiqués ?",
     aide: "Pas le droit de demander à la concernée !",
     options: ["Basketball", "Judo", "Athlétisme", "GRS", "Natation", "Lancer de poids"],
     answer: ["Basketball"]
@@ -32,13 +32,13 @@ export const steps = [
   {
     type: "memory",
     title: "Memory 1",
-    description: "Retrouvez toutes les paires !",
+    description: "Retrouve toutes les paires !",
     pairs: [1, 1, 2, 2, 3, 3, 4, 4]
   },
   {
     type: "anagram",
     title: "Anagramme 1",
-    description: "Reconstituez le mot !",
+    description: "Reconstitue le mot !",
     aide: "Sa phobie ...️",
     answer: "ARAIGNEES"
   },
@@ -60,20 +60,20 @@ export const steps = [
   {
     type: "memory",
     title: "Memory 2",
-    description: "Retrouvez toutes les paires !",
+    description: "Retrouve toutes les paires !",
     pairs: [5, 5, 6, 6, 7, 7, 8, 8]
   },
   {
     type: "puzzle",
     title: "L'enfant parfaite",
-    description: "Reconstituez l'image !",
+    description: "Reconstitue l'image !",
     image: "/images/photo1.jpg",
     size: 3
   },
   {
     type: "anagram",
     title: "Anagramme 2",
-    description: "Reconstituez le mot !",
+    description: "Reconstitue le mot !",
     aide: "De qui a-t-elle le plus peur ? 😏",
     answer: "PERSONNE"
   },
@@ -113,14 +113,14 @@ export const steps = [
   {
     type: "anagram",
     title: "Anagramme 3",
-    description: "Reconstituez le mot !",
+    description: "Reconstitue le mot !",
     aide: "Sa plus grande peur (fun fact : Elle voulait se construire un bunker 😊)",
     answer: "ATTENTATS"
   },
   {
     type: "puzzle",
     title: "Sa moitié, son âme sœur...",
-    description: "Reconstituez l'image !",
+    description: "Reconstitue l'image !",
     image: "/images/photo3.jpg",
     size: 3
   },
@@ -135,20 +135,20 @@ export const steps = [
   {
     type: "memory",
     title: "Memory 3",
-    description: "Retrouvez toutes les paires !",
+    description: "Retrouve toutes les paires !",
     pairs: [9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14]
   },
   {
     type: "anagram",
     title: "Anagramme 4",
-    description: "Reconstituez le mot !",
+    description: "Reconstitue le mot !",
     aide: "C'est la reine du game :",
     answer: "MONOPOLI"
   },
   {
     type: "puzzle",
     title: "L'enfant, la femme, la mère, la sœur, l'amie que tout le monde rêve d'avoir",
-    description: "Reconstituez l'image !",
+    description: "Reconstitue l'image !",
     image: "/images/photo2.jpg",
     size: 3
   },

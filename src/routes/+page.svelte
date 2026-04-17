@@ -57,7 +57,7 @@
 
   {:else}
     <header>
-      <h1>🎂 Quizz</h1>
+      <h1>🎂 quiz</h1>
       <span class="progress-text">Étape {$current + 1} / {steps.length}</span>
     </header>
 

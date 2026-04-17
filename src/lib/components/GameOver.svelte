@@ -52,7 +52,7 @@
 <div class="victory">
   <span class="cake">🎂</span>
   <h2>Bravo {$teamName} !</h2>
-  <p class="subtitle">Vous avez terminé le jeu !</p>
+  <p class="subtitle">Tu as terminé le jeu !</p>
 
   <p class="score-final">Score : <strong>{$score} / {QUIZ_TOTAL}</strong></p>
 

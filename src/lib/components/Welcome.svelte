@@ -23,9 +23,9 @@
   <div class="deco">
     <span class="icon">🎂</span>
     <div class="title">Jeu d'Anniversaire Biche</div>
-    <div class="subtitle">Le grand quizz des invités</div>
-    <p class="p">Tentez de gagner l'un des prix !</p>
-    <p class="missclick">Vous avez jusqu'à 23h pour répondre aux questions, faites attention aux missclick...</p>
+    <div class="subtitle">Le grand quiz des invités</div>
+    <p class="p">Tente de gagner l'un des prix !</p>
+    <p class="missclick">Tu as jusqu'à 22h pour répondre aux questions, fais attention aux missclick...</p>
   </div>
 
   <div class="divider"><span>✦</span></div>
@@ -41,7 +41,7 @@
     on:input={() => error = false}
   />
   {#if error}
-    <p class="error-msg">Entrez un nom de joueur !</p>
+    <p class="error-msg">Entre un nom de joueur !</p>
   {/if}
 
   <button on:click={start}>Commencer →</button>
