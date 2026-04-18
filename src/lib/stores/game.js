@@ -103,19 +103,25 @@ export async function saveScore() {
     const s    = get(score);
     const t    = get(totalTime);
 
+    console.log('📝 saveScore appelé :', { name, s, t, NPOINT_URL });
+
     const res  = await fetch(NPOINT_URL);
+    console.log('📥 GET npoint status :', res.status);
     const data = await res.json();
+    console.log('📦 Données actuelles :', data);
 
     data.scores.push({ name, score: s, time: t, date: Date.now() });
     data.scores.sort((a, b) => b.score - a.score || a.time - b.time);
 
-    await fetch(NPOINT_URL, {
+    const postRes = await fetch(NPOINT_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
     });
-  } catch {
-    // silencieux
+    console.log('📤 POST npoint status :', postRes.status);
+
+  } catch (e) {
+    console.error('❌ Erreur saveScore :', e);
   }
 }
 
