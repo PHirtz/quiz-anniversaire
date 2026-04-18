@@ -45,7 +45,7 @@ export const steps = [
   {
     type: "code",
     title: "Question 3",
-    description: "Quel est le titre de ce manga ?",
+    description: "Quel est le titre de cet animé ?",
     image: "/images/devinette1.jpg",
     code: "Jeanne et Serge"
   },
