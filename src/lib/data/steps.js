@@ -17,7 +17,7 @@ export const steps = [
   {
     type: "quiz",
     title: "Question 1",
-    description: "Quels sports Aurélie n'a pas pratiqués ?",
+    description: "Quel sport Aurélie n'a pas pratiqué ?",
     aide: "Pas le droit de demander à la concernée !",
     options: ["Basketball", "Judo", "Athlétisme", "GRS", "Natation", "Lancer de poids"],
     answer: ["Basketball"]
